@@ -18,7 +18,10 @@ metadata:
   name: {{ template "helm-guestbook.fullname" . }}
   namespace: {{ .Values.namespace }}
   labels:
-    {{- include "helm-guestbook.labels" . | nindent 4 }}
+    app: {{ template "helm-guestbook.name" . }}
+    chart: {{ template "helm-guestbook.chart" . }}
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }}
   {{- with .Values.ingress.annotations }}
   annotations:
     {{- toYaml . | nindent 4 }}
